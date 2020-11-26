@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0.3">
+	<xs:include schemaLocation="./NHIS-Nomenclatures.xsd"/>
+	<!-- Common data types used in different requests. -->
+	<xs:simpleType name="uuid" final="union">
+		<xs:annotation>
+			<xs:documentation>Базов тип string ограничен до букви (латиница), цифри, и тире с цел репрезантиране на UUID.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z0-9\-]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alphanumericString" final="union">
+		<xs:annotation>
+			<xs:documentation>Базов тип string ограничен до букви (латиница), цифри, тире и празен знак.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zA-Z0-9\- ]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="alphaString" final="union">
+		<xs:annotation>
+			<xs:documentation>Базов тип string ограничен до букви (латиница и кирилица) и празен знак.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[a-zа-яA-ZА-Я ]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="numericString" final="union">
+		<xs:annotation>
+			<xs:documentation>Базов тип string ограничен до цифри.</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9]+"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="amount">
+		<xs:annotation>
+			<xs:documentation>Базов тип децимално число, конфигурирано да описва суми.</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:decimal">
+					<xs:totalDigits value="19"/>
+					<xs:fractionDigits value="4"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="dataType" type="xs:string"/>
+	</xs:complexType>
+	<!-- Common elements used in different requests. -->
+	<xs:element name="sender">
+		<xs:annotation>
+			<xs:documentation>Тип изпращач на съобщението.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" type="nhis:CL018" use="required"/>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="senderId">
+		<xs:annotation>
+			<xs:documentation>ID na лицето, което изпраща съобщението (УИН на лекар, зъболекар или специалист).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="nhis:alphanumericString">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="recipient">
+		<xs:annotation>
+			<xs:documentation>Тип на получател на съобщението.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" type="nhis:CL018" use="required"/>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="recipientId">
+		<xs:annotation>
+			<xs:documentation>ID на получателя на съобщението.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="nhis:alphanumericString">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="messageId">
+		<xs:annotation>
+			<xs:documentation>Уникален идентификатор на съобщението - трябва да бъде ново UUID генерирано към момента на изпращане на съобщението</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="nhis:uuid">
+						<xs:minLength value="36"/>
+						<xs:maxLength value="36"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="messageType">
+		<xs:annotation>
+			<xs:documentation>Тип на съобщението (винаги във формат Pxxx).</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:length value="4"/>
+						<xs:pattern value="([RP]{1}[0-9]{3})"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createdOn">
+		<xs:annotation>
+			<xs:documentation>Дата и час на изготвяне на съобщението по ISO 8601.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="value" type="xs:dateTime" use="required"/>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<!-- Message frame elements -->
+	<xs:element name="header">
+		<xs:annotation>
+			<xs:documentation>Носител на системната информация за съобщението.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:sender"/>
+				<xs:element ref="nhis:senderId"/>
+				<xs:element ref="nhis:recipient"/>
+				<xs:element ref="nhis:recipientId"/>
+				<xs:element ref="nhis:messageId"/>
+				<xs:element ref="nhis:messageType"/>
+				<xs:element ref="nhis:createdOn"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="contents" type="nhis:contentsBase">
+		<xs:annotation>
+			<xs:documentation>Носител на бизнес информацията за съобщението.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="contentsBase">
+		<xs:sequence/>
+	</xs:complexType>
+	<xs:element name="signature" xmlns="http://www.w3.org/2000/09/xmldsig#">
+		<xs:annotation>
+			<xs:documentation>Електронен подпис на лицето, изпращащо заявката към НЗИС. За технически детайли вижте https://www.w3.org/TR/xmldsig-core/</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="message" type="nhis:messageBase">
+		<xs:annotation>
+			<xs:documentation>Контейнер на съобщението.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="messageBase">
+		<xs:sequence>
+			<xs:element ref="nhis:header"/>
+			<xs:element ref="nhis:contents"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg/p003" targetNamespace="https://www.his.bg/p003" elementFormDefault="qualified" version="1.0">
+	<xs:include schemaLocation="./NHIS-Fields.xsd"/>
+	<!-- Redefine the message contents for this type of message. -->
+	<xs:redefine schemaLocation="./NHIS-Commons.xsd">
+		<xs:complexType name="contentsBase" mixed="false">
+			<xs:complexContent>
+				<xs:extension base="nhis:contentsBase">
+					<xs:sequence>
+						<xs:element ref="nhis:nrnPrescription" minOccurs="0"/>
+						<xs:element ref="nhis:lrn" minOccurs="0"/>
+						<xs:element ref="nhis:pmi" minOccurs="0"/>
+						<xs:element ref="nhis:identifierType" minOccurs="0"/>
+						<xs:element ref="nhis:identifier" minOccurs="0"/>
+						<xs:element ref="nhis:birthDate" minOccurs="0"/>
+						<xs:element ref="nhis:name" minOccurs="0"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:complexType name="messageBase" mixed="false">
+			<xs:complexContent>
+				<xs:extension base="nhis:messageBase">
+					<xs:sequence>
+						<xs:element ref="nhis:signature"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:redefine>
+	<!-- Define all elements in 'Contents' block -->
+	<xs:element name="nrnPrescription" type="nhis:nrnBase"/>
+	<xs:element name="lrn" type="nhis:lrnBase"/>
+	<xs:element name="pmi" type="nhis:pmiBase"/>
+	<xs:element name="identifierType" type="nhis:identifierTypeBase"/>
+	<xs:element name="identifier" type="nhis:identifierBase"/>
+	<xs:element name="birthDate" type="nhis:birthDateBase"/>
+	<xs:element name="name" type="nhis:humanNameBase"/>
+</xs:schema>
