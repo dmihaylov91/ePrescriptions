@@ -22,4 +22,6 @@ public interface EPrescriptionSearchRestClient {
 	P004_Message searchForEPrescriptions(final P003_Message searchCriteria);
 
 	P004_Message dummySearchForEPrescriptions();
+
+	P004_Message searchForEPrescriptions();
 }

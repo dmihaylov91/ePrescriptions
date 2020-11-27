@@ -21,6 +21,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
+import com.ibm.eprescription.model.P003_Message;
 import com.ibm.eprescription.model.P004_Message;
 import com.ibm.eprescription.model.p003.P003_MessageBase;
 import com.ibm.eprescription.restclient.AbstractEPrescriptionRestClient;
@@ -33,11 +34,31 @@ import com.ibm.eprescription.restclient.search.EPrescriptionSearchRestClient;
 public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRestClient<P003_MessageBase, P004_Message>
 		implements EPrescriptionSearchRestClient {
 
-	private String uri = "";
+	private String uri;
 
 	@Override
-	public P004_Message searchForEPrescriptions(final P003_MessageBase searchCriteria) {
+	public P004_Message searchForEPrescriptions(final P003_Message searchCriteria) {
 		return this.getResponse(searchCriteria);
+	}
+
+	@Override
+	public P004_Message searchForEPrescriptions() {
+
+		try {
+			File file = ResourceUtils.getFile("classpath:xml/NHIS-P003-Simplified.xml");
+
+			JAXBContext jaxbContext = JAXBContext.newInstance(P003_Message.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			P003_Message requestMessage = (P003_Message) jaxbUnmarshaller.unmarshal(file);
+
+			this.getResponse(requestMessage);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	@Override
