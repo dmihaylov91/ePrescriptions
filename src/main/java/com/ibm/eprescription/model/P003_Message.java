@@ -9,17 +9,16 @@
  * Confidential Information and shall use it only in accordance with the
  * terms of the license agreement you entered into with SAP Hybris.
  */
-package com.ibm.eprescription.restclient.search;
+package com.ibm.eprescription.model;
 
-import com.ibm.eprescription.model.P003_Message;
-import com.ibm.eprescription.model.P004_Message;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import com.ibm.eprescription.model.p003.P003_MessageBase;
 
 /**
- * @author DimitarMihaylov
+ *
  */
+@XmlRootElement(name = "message", namespace = "https://www.his.bg")
+public class P003_Message extends P003_MessageBase {
 
-public interface EPrescriptionSearchRestClient {
-	P004_Message searchForEPrescriptions(final P003_Message searchCriteria);
-
-	P004_Message dummySearchForEPrescriptions();
 }

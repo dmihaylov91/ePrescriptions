@@ -13,71 +13,56 @@ package com.ibm.eprescription.restclient;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
-import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-
 
 /**
  * @author DimitarMihaylov
  */
 
-public abstract class AbstractEPrescriptionRestClient<Request, Response>
-{
+public abstract class AbstractEPrescriptionRestClient<Request, Response> {
 	protected static final String HEADER_CONTENT_TYPE = "Content-Type";
 	protected static final String HEADER_CONTENT_TYPE_XML = "application/xml";
 
 	protected String apiEndPoint;
 	protected RestTemplate restTemplate;
 
-
-	protected Response getResponse(final Request request)
-	{
+	protected Response getResponse(final Request request) {
 		final HttpEntity<Request> requestEntity = new HttpEntity<Request>(request, getHeaders());
 		return restTemplate.exchange(getUrl(), getHttpMethod(), requestEntity, getResponseClass()).getBody();
 
 	}
 
-	protected MultiValueMap<String, String> getHeaders()
-	{
+	protected MultiValueMap<String, String> getHeaders() {
 		final MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
 		headers.add(HEADER_CONTENT_TYPE, HEADER_CONTENT_TYPE_XML);
 
 		return headers;
 	}
 
-	protected String getUrl()
-	{
+	protected String getUrl() {
 		return apiEndPoint + getUri();
 	}
 
 	protected abstract HttpMethod getHttpMethod();
 
-
 	protected abstract Class<Response> getResponseClass();
-
 
 	protected abstract String getUri();
 
-
 	/**
-	 * @param apiEndPoint
-	 *           the apiEndPoint to set
+	 * @param apiEndPoint the apiEndPoint to set
 	 */
-	public void setApiEndPoint(final String apiEndPoint)
-	{
+	public void setApiEndPoint(final String apiEndPoint) {
 		this.apiEndPoint = apiEndPoint;
 	}
 
 	/**
-	 * @param restTemplate
-	 *           the restTemplate to set
+	 * @param restTemplate the restTemplate to set
 	 */
-	public void setRestTemplate(final RestTemplate restTemplate)
-	{
+	public void setRestTemplate(final RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-
 
 }

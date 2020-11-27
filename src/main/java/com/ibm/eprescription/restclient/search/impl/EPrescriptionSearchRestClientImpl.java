@@ -26,70 +26,57 @@ import com.ibm.eprescription.model.p003.P003_MessageBase;
 import com.ibm.eprescription.restclient.AbstractEPrescriptionRestClient;
 import com.ibm.eprescription.restclient.search.EPrescriptionSearchRestClient;
 
-
 /**
  * @author DimitarMihaylov
  */
 @Service
-public class EPrescriptionSearchRestClientImpl
-		extends AbstractEPrescriptionRestClient<P003_MessageBase, P004_Message>
-		implements EPrescriptionSearchRestClient
-{
-
+public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRestClient<P003_MessageBase, P004_Message>
+		implements EPrescriptionSearchRestClient {
 
 	private String uri = "";
 
 	@Override
-	public P004_Message searchForEPrescriptions(final P003_MessageBase searchCriteria)
-	{
+	public P004_Message searchForEPrescriptions(final P003_MessageBase searchCriteria) {
 		return this.getResponse(searchCriteria);
 	}
 
-
 	@Override
-	public P004_Message dummySearchForEPrescriptions()
-	{
+	public P004_Message dummySearchForEPrescriptions() {
 		try {
 			File file = ResourceUtils.getFile("classpath:xml/NHIS-P004-Simplified.xml");
-			
+
 			JAXBContext jaxbContext = JAXBContext.newInstance(P004_Message.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			P004_Message res = (P004_Message)jaxbUnmarshaller.unmarshal(file);
-			
+			P004_Message res = (P004_Message) jaxbUnmarshaller.unmarshal(file);
+
 			return res;
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 
-
 	@Override
-	protected HttpMethod getHttpMethod()
-	{
+	protected HttpMethod getHttpMethod() {
 
 		return HttpMethod.POST;
 	}
 
 	@Override
-	protected Class<P004_Message> getResponseClass()
-	{
+	protected Class<P004_Message> getResponseClass() {
 
 		return P004_Message.class;
 	}
 
 	@Override
-	protected String getUri()
-	{
+	protected String getUri() {
 		return uri;
 	}
 
-
-	public void setUri(final String uri)
-	{
+	public void setUri(String uri) {
 		this.uri = uri;
 	}
+
 }
