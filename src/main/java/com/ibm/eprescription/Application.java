@@ -28,7 +28,9 @@ public class Application {
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 		return args -> {
 
-			P004_Message message = ePrescriptionSearchRestClient.dummySearchForEPrescriptions();
+			P004_Message message = ePrescriptionSearchRestClient.searchForEPrescriptions();
+
+			log.info(message.toString());
 
 		};
 	}
