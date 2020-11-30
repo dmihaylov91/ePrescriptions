@@ -13,8 +13,10 @@
 package com.ibm.eprescription.restclient.search.impl;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.springframework.http.HttpMethod;
@@ -53,8 +55,10 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 
 			this.getResponse(requestMessage);
 
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 
@@ -71,8 +75,10 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			P004_Message res = (P004_Message) jaxbUnmarshaller.unmarshal(file);
 
 			return res;
-		} catch (Exception e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 

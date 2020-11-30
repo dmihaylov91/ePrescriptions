@@ -9,6 +9,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.ibm.eprescription.restclient.exception.RestTemplateResponseErrorHandler;
 import com.ibm.eprescription.restclient.search.impl.EPrescriptionSearchRestClientImpl;
 
 @Configuration
@@ -42,10 +43,12 @@ public class EPrescriptionConfig {
 	}
 
 	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder, ClientHttpRequestFactory clientHttpRequestFactory) {
+	public RestTemplate restTemplate(RestTemplateBuilder builder, ClientHttpRequestFactory clientHttpRequestFactory,
+			RestTemplateResponseErrorHandler restTemplateResponseErrorHandler) {
 
 		RestTemplate restTemplate = builder.build();
 		restTemplate.setRequestFactory(clientHttpRequestFactory);
+		restTemplate.setErrorHandler(restTemplateResponseErrorHandler);
 
 		return restTemplate;
 	}
