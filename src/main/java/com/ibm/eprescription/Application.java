@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import com.ibm.eprescription.model.P004_Message;
-import com.ibm.eprescription.restclient.exception.EPrescriptionRestTemplateException;
 import com.ibm.eprescription.restclient.search.EPrescriptionSearchRestClient;
 
 @SpringBootApplication
@@ -28,20 +27,8 @@ public class Application {
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 
-		try {
-			System.out.println("inside command line runner");
-			P004_Message message = ePrescriptionSearchRestClient.searchForEPrescriptions();
-			System.out.println("successfully searched for epresc");
-		}
-
-		catch (EPrescriptionRestTemplateException ex) {
-			System.out.println("Catching EPrescriptionRestTemplateException exception");
-			System.out.println(ex.getMessage());
-
-		} catch (Exception ex) {
-			System.out.println("Catching Exception exception");
-			System.out.println(ex.toString());
-		}
+		P004_Message message = ePrescriptionSearchRestClient.searchForEPrescriptions();
+		System.out.println("P004_Message: " + message.toString());
 
 		return null;
 

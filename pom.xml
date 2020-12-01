@@ -102,6 +102,26 @@
 							<clearOutputDir>false</clearOutputDir>
 						</configuration>                       
                     </execution>
+                    
+                    <execution>
+                        <id>p009-xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                                               
+                        <configuration>
+							<!-- The package of your generated sources -->
+							<packageName>com.ibm.eprescription.model.p099</packageName>
+							<sources>
+								<source>src/main/resources/xsd/p099</source>
+							</sources>
+							<xjbSources>
+								<xjbSource>src/main/resources/xjb/p099</xjbSource>
+							</xjbSources>
+							<outputDirectory>${basedir}/src/main/java</outputDirectory>
+							<clearOutputDir>false</clearOutputDir>
+						</configuration>                       
+                    </execution>
  
                 </executions>
                 

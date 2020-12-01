@@ -422,11 +422,11 @@
 			<xs:documentation>Тип на Е-рецепта</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="Т1"/>
-			<xs:enumeration value="Т2"/>
-			<xs:enumeration value="Т3"/>
-			<xs:enumeration value="Т4"/>
-			<xs:enumeration value="Т5"/>
+			<xs:enumeration value="T1"/>
+			<xs:enumeration value="T2"/>
+			<xs:enumeration value="T3"/>
+			<xs:enumeration value="T4"/>
+			<xs:enumeration value="T5"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="CL008" final="restriction">

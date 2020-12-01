@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0">
+	<xs:include schemaLocation="./NHIS-Fields.xsd"/>
+	<!-- Redefine the message contents for this type of message. -->
+	<xs:redefine schemaLocation="./NHIS-Commons.xsd">
+		<xs:complexType name="contentsBase" mixed="false">
+			<xs:complexContent>
+				<xs:extension base="nhis:contentsBase">
+					<xs:sequence>
+						<xs:element ref="nhis:error" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:redefine>
+	<!-- Define all elements in 'Error' block -->
+	<xs:element name="type">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Специфичен код на грешката</xs:documentation>
+			</xs:annotation>
+			<xs:attribute name="value" type="nhis:CL999" use="required"/>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="reason">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Текст, описващ причината за възникване на грешката (на Пр. "некоректно подаден параметър")</xs:documentation>
+			</xs:annotation>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="description">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Допълнителна информация за грешката, ако има такава необходимост</xs:documentation>
+			</xs:annotation>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="2000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="faultyAttribute">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>Системно име на сгрешения параметър, ако това е типа на грешката</xs:documentation>
+			</xs:annotation>
+			<xs:attribute name="value" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="1"/>
+						<xs:maxLength value="255"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="dataType" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="error">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:type"/>
+				<xs:element ref="nhis:reason" minOccurs="0"/>
+				<xs:element ref="nhis:description" minOccurs="0"/>
+				<xs:element ref="nhis:faultyAttribute" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

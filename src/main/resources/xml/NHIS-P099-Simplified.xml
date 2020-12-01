@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nhis:message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nhis="https://www.his.bg" xsi:schemaLocation="https://www.his.bg https://www.his.bg/api/v1/NHIS-P099.xsd">
+	<nhis:header>
+		<nhis:sender value="4" dataType="[code]"/>
+		<nhis:senderId value="NHIS" dataType="[string]"/>
+		<nhis:recipient value="2" dataType="[code]"/>
+		<nhis:recipientId value="Software" dataType="[string]"/>
+		<nhis:messageId value="ddda5e6e-83e7-4b9a-a306-2925a69826ac" dataType="[string]"/>
+		<nhis:messageType value="P099" dataType="[string]"/>
+		<nhis:createdOn value="2020-10-21T18:11:23" dataType="[dateTime]"/>
+	</nhis:header>
+	<nhis:contents>
+		<nhis:error>
+			<nhis:type value="E002" dataType="[code]"/>
+			<nhis:reason value="error" dataType="[string]"/>
+			<nhis:description value="" dataType="[string]"/>
+			<nhis:faultyAttribute value="pmi" dataType="[string]"/>
+		</nhis:error>
+	</nhis:contents>
+</nhis:message>

@@ -13,10 +13,8 @@
 package com.ibm.eprescription.restclient.search.impl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
 import org.springframework.http.HttpMethod;
@@ -25,22 +23,30 @@ import org.springframework.util.ResourceUtils;
 
 import com.ibm.eprescription.model.P003_Message;
 import com.ibm.eprescription.model.P004_Message;
-import com.ibm.eprescription.model.p003.P003_MessageBase;
+import com.ibm.eprescription.model.P099_Message;
 import com.ibm.eprescription.restclient.AbstractEPrescriptionRestClient;
+import com.ibm.eprescription.restclient.exception.EPrescriptionResponseException;
 import com.ibm.eprescription.restclient.search.EPrescriptionSearchRestClient;
 
 /**
  * @author DimitarMihaylov
  */
 @Service
-public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRestClient<P003_MessageBase, P004_Message>
+public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRestClient<P003_Message, P004_Message>
 		implements EPrescriptionSearchRestClient {
 
 	private String uri;
 
 	@Override
 	public P004_Message searchForEPrescriptions(final P003_Message searchCriteria) {
-		return this.getResponse(searchCriteria);
+
+		try {
+			return this.getResponse(searchCriteria);
+		} catch (EPrescriptionResponseException e) {
+			return new P004_Message(e.getErrorMessage());
+		} catch (Exception e) {
+			return createErrorResponse(e.getMessage());
+		}
 	}
 
 	@Override
@@ -53,16 +59,18 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 			P003_Message requestMessage = (P003_Message) jaxbUnmarshaller.unmarshal(file);
 
-			this.getResponse(requestMessage);
+			return this.getResponse(requestMessage);
+		} catch (EPrescriptionResponseException e) {
+			return new P004_Message(e.getErrorMessage());
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JAXBException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return createErrorResponse(e.getMessage());
 		}
+	}
 
-		return null;
+	private P004_Message createErrorResponse(String errorMessage) {
+
+		return new P004_Message(new P099_Message(errorMessage));
 	}
 
 	@Override
@@ -75,14 +83,12 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			P004_Message res = (P004_Message) jaxbUnmarshaller.unmarshal(file);
 
 			return res;
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
+		} catch (EPrescriptionResponseException e) {
+			return new P004_Message(e.getErrorMessage());
 
-		return null;
+		} catch (Exception e) {
+			return createErrorResponse(e.getMessage());
+		}
 	}
 
 	@Override
