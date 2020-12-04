@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nhis:message xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:nhis="https://www.his.bg" xsi:schemaLocation="https://www.his.bg https://www.his.bg/api/v1/NHIS-P005.xsd">
+	<nhis:header>
+		<nhis:sender value="2" dataType="[code]"/>
+		<nhis:senderId value="Pharma Software" dataType="[string]"/>
+		<nhis:recipient value="4" dataType="[code]"/>
+		<nhis:recipientId value="NHIS" dataType="[string]"/>
+		<nhis:messageId value="ddda5e6e-83e7-4b9a-a306-2925a69826ac" dataType="[string]"/>
+		<nhis:messageType value="P005" dataType="[string]"/>
+		<nhis:createdOn value="2020-10-21T18:11:23" dataType="[dateTime]"/>
+	</nhis:header>
+	<nhis:contents>
+		<nhis:prescription>
+			<nhis:nrnPrescription value="12D361271273" dataType="[string]"/>
+		</nhis:prescription>
+		<nhis:dispense>
+			<nhis:fulfilDate value="2020-10-26" dataType="[date]"/>
+			<nhis:isInternationalFulfil value="false" dataType="[boolean]"/>
+			<nhis:group>
+				<nhis:groupIdentifier value="A" dataType="[code]"/>
+				<nhis:medication>
+					<nhis:sequenceId value="1" dataType="[positiveInt]"/>
+					<nhis:medicationCode value="" dataType="[code]"/>
+					<nhis:verification>
+						<nhis:verificationCode value="30912830123" dataType="[string]"/>
+						<nhis:ppn value="1233123" dataType="[string]"/>
+						<nhis:gtin value="41232133123123" dataType="[string]"/>
+						<nhis:sn value="412321" dataType="[string]"/>
+						<nhis:lot value="644211213" dataType="[string]"/>
+						<nhis:exp value="201026" dataType="[date]"/>
+					</nhis:verification>
+					<nhis:nhifCode value="" dataType="[code]"/>
+					<nhis:quantity value="2" dataType="[positiveInt]"/>
+					<nhis:whenPrepared value="2020-10-21T18:11:23" dataType="[dateTime]"/>
+					<nhis:whenHandedOver value="2020-10-21T18:11:23" dataType="[dateTime]"/>
+					<nhis:paidByPatient value="20.31" dataType="[decimal]"/>
+					<nhis:paidByNhif value="239.19" dataType="[decimal]"/>
+					<nhis:substitution>
+						<nhis:wasSubstituted value="true" dataType="[boolean]"/>
+						<nhis:substitutionType value="G" dataType="[code]"/>
+						<nhis:reason value="" dataType="[string]"/>
+					</nhis:substitution>
+					<nhis:dosageInstruction>
+						<nhis:sequence value="1" dataType="[positiveInt]"/>
+						<nhis:asNeeded value="false" dataType="[boolean]"/>
+						<nhis:route value="1" dataType="[code]"/>
+						<nhis:doseQuantity value="5" dataType="[positiveInt]"/>
+						<nhis:frequency value="2" dataType="[positiveInt]"/>
+						<nhis:period value="1" dataType="[decimal]"/>
+						<nhis:periodUnit value="d" dataType="[code]"/>
+						<nhis:boundsDuration value="10" dataType="[decimal]"/>
+						<nhis:boundsDurationUnit value="mo" dataType="[code]"/>
+						<nhis:text value="" dataType="[string]"/>
+					</nhis:dosageInstruction>
+				</nhis:medication>
+			</nhis:group>
+			<nhis:isPatientReceiver value="false" dataType="[boolean]"/>
+			<nhis:receiver>
+				<nhis:identifierType value="1" dataType="[code]"/>
+				<nhis:identifier value="49812732193" dataType="[string]"/>
+				<nhis:name>
+					<nhis:given value="Other" dataType="[string]"/>
+					<nhis:family value="Name" dataType="[string]"/>
+				</nhis:name>
+			</nhis:receiver>
+		</nhis:dispense>
+		<nhis:performer>
+			<nhis:pphi value="4761238712" dataType="[string]"/>
+			<nhis:rphaNumber value="01" dataType="[code]"/>
+			<nhis:pharmacyNumber value="4781232" dataType="[string]"/>
+			<nhis:phone value="891237123" dataType="[string]"/>
+			<nhis:email value="other@pharma.com" dataType="[string]"/>
+		</nhis:performer>
+	</nhis:contents>
+	<nhis:signature/>
+</nhis:message>

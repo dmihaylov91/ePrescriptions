@@ -9,6 +9,7 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
+import com.ibm.eprescription.restclient.dispense.impl.EPrescriptionDispenseRestClientImpl;
 import com.ibm.eprescription.restclient.exception.DummyEPrescriptionResponseErrorHandler;
 import com.ibm.eprescription.restclient.search.impl.EPrescriptionSearchRestClientImpl;
 
@@ -30,6 +31,9 @@ public class EPrescriptionConfig {
 
 	@Value("${eprescription.search.uri}")
 	String searchUri;
+
+	@Value("${eprescription.dispense.uri}")
+	String dispenseUri;
 
 	@Bean
 	public ClientHttpRequestFactory clientHttpRequestFactory() {
@@ -60,6 +64,17 @@ public class EPrescriptionConfig {
 		ePrescriptionSearchRestClient.setRestTemplate(restTemplate);
 		ePrescriptionSearchRestClient.setApiEndPoint(apiEndPoint);
 		ePrescriptionSearchRestClient.setUri(searchUri);
+
+		return ePrescriptionSearchRestClient;
+	}
+
+	@Bean
+	public EPrescriptionDispenseRestClientImpl ePrescriptionDispenseRestClient(RestTemplate restTemplate) {
+
+		EPrescriptionDispenseRestClientImpl ePrescriptionSearchRestClient = new EPrescriptionDispenseRestClientImpl();
+		ePrescriptionSearchRestClient.setRestTemplate(restTemplate);
+		ePrescriptionSearchRestClient.setApiEndPoint(apiEndPoint);
+		ePrescriptionSearchRestClient.setUri(dispenseUri);
 
 		return ePrescriptionSearchRestClient;
 	}

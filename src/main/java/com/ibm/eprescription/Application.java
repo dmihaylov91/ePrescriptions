@@ -10,7 +10,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 import com.ibm.eprescription.model.P004_Message;
-import com.ibm.eprescription.restclient.search.EPrescriptionSearchRestClient;
+import com.ibm.eprescription.model.P005_Message;
+import com.ibm.eprescription.model.P006_Message;
+import com.ibm.eprescription.service.EPrescriptionService;
 
 @SpringBootApplication
 public class Application {
@@ -18,7 +20,7 @@ public class Application {
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	@Autowired
-	private EPrescriptionSearchRestClient ePrescriptionSearchRestClient;
+	private EPrescriptionService ePrescriptionService;
 
 	public static void main(String args[]) {
 		SpringApplication.run(Application.class);
@@ -27,8 +29,11 @@ public class Application {
 	@Bean
 	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
 
-		P004_Message message = ePrescriptionSearchRestClient.searchForEPrescriptions();
-		System.out.println("P004_Message: " + message.toString());
+		P004_Message searchMessage = ePrescriptionService.searchForEPrescriptions();
+		System.out.println("P004_Message: " + searchMessage.toString());
+
+		P006_Message dispenseMessage = ePrescriptionService.dispenseMedicalPrescription(new P005_Message());
+		System.out.println("P006_Message: " + dispenseMessage.toString());
 
 		return null;
 

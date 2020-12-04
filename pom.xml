@@ -104,6 +104,46 @@
                     </execution>
                     
                     <execution>
+                        <id>p005-xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                                               
+                        <configuration>
+							<!-- The package of your generated sources -->
+							<packageName>com.ibm.eprescription.model.p005</packageName>
+							<sources>
+								<source>src/main/resources/xsd/p005</source>
+							</sources>
+							<xjbSources>
+								<xjbSource>src/main/resources/xjb/p005</xjbSource>
+							</xjbSources>
+							<outputDirectory>${basedir}/src/main/java</outputDirectory>
+							<clearOutputDir>false</clearOutputDir>
+						</configuration>                       
+                    </execution>
+                    
+                    <execution>
+                        <id>p006-xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                                               
+                        <configuration>
+							<!-- The package of your generated sources -->
+							<packageName>com.ibm.eprescription.model.p006</packageName>
+							<sources>
+								<source>src/main/resources/xsd/p006</source>
+							</sources>
+							<xjbSources>
+								<xjbSource>src/main/resources/xjb/p006</xjbSource>
+							</xjbSources>
+							<outputDirectory>${basedir}/src/main/java</outputDirectory>
+							<clearOutputDir>false</clearOutputDir>
+						</configuration>                       
+                    </execution>
+                    
+                    <execution>
                         <id>p009-xjc</id>
                         <goals>
                             <goal>xjc</goal>

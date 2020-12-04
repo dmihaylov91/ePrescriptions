@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0">
+	<xs:include schemaLocation="../common/NHIS-Fields.xsd"/>
+	<!-- Redefine the message contents for this type of message. -->
+	<xs:redefine schemaLocation="../common/NHIS-Commons.xsd">
+		<xs:complexType name="contentsBase" mixed="false">
+			<xs:complexContent>
+				<xs:extension base="nhis:contentsBase">
+					<xs:sequence>
+						<xs:element ref="nhis:nrnDispense"/>
+						<xs:element ref="nhis:status"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:redefine>
+	<!-- Define all elements in 'Contents' block -->
+	<xs:element name="nrnDispense" type="nhis:nrnBase"/>
+	<xs:element name="status" type="nhis:prescriptionStatusBase"/>
+</xs:schema>

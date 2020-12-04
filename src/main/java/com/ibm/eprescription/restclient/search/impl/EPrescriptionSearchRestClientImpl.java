@@ -45,7 +45,7 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 		} catch (EPrescriptionResponseException e) {
 			return new P004_Message(e.getErrorMessage());
 		} catch (Exception e) {
-			return createErrorResponse(e.getMessage());
+			return new P004_Message(new P099_Message(e.getMessage()));
 		}
 	}
 
@@ -64,13 +64,8 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			return new P004_Message(e.getErrorMessage());
 
 		} catch (Exception e) {
-			return createErrorResponse(e.getMessage());
+			return new P004_Message(new P099_Message(e.getMessage()));
 		}
-	}
-
-	private P004_Message createErrorResponse(String errorMessage) {
-
-		return new P004_Message(new P099_Message(errorMessage));
 	}
 
 	@Override
@@ -87,7 +82,7 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			return new P004_Message(e.getErrorMessage());
 
 		} catch (Exception e) {
-			return createErrorResponse(e.getMessage());
+			return new P004_Message(new P099_Message(e.getMessage()));
 		}
 	}
 

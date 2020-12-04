@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0">
+	<xs:include schemaLocation="../common/NHIS-Fields.xsd"/>
+	<!-- Redefine the message contents for this type of message. -->
+	<xs:redefine schemaLocation="../common/NHIS-Commons.xsd">
+		<xs:complexType name="contentsBase" mixed="false">
+			<xs:complexContent>
+				<xs:extension base="nhis:contentsBase">
+					<xs:sequence>
+						<xs:element ref="nhis:prescription"/>
+						<xs:element ref="nhis:dispense"/>
+						<xs:element ref="nhis:performer"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+		<xs:complexType name="messageBase" mixed="false">
+			<xs:complexContent>
+				<xs:extension base="nhis:messageBase">
+					<xs:sequence>
+						<xs:element ref="nhis:signature"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:redefine>
+	<!-- Define all elements in 'Prescription' block -->
+	<xs:element name="nrnPrescription" type="nhis:nrnBase"/>
+	<xs:element name="prescription">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:nrnPrescription"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Dosage Instruction' block -->
+	<xs:element name="sequence" type="nhis:sequenceBase"/>
+	<xs:element name="asNeeded" type="nhis:asNeededBase"/>
+	<xs:element name="route" type="nhis:routeBase"/>
+	<xs:element name="doseQuantity" type="nhis:doseQuantityBase"/>
+	<xs:element name="frequency" type="nhis:frequencyBase"/>
+	<xs:element name="period" type="nhis:periodBase"/>
+	<xs:element name="periodUnit" type="nhis:periodUnitBase"/>
+	<xs:element name="boundsDuration" type="nhis:boundsDurationBase"/>
+	<xs:element name="boundsDurationUnit" type="nhis:boundsDurationUnitBase"/>
+	<xs:element name="text" type="nhis:textBase"/>
+	<xs:element name="dosageInstruction">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:sequence" minOccurs="0"/>
+				<xs:element ref="nhis:asNeeded" minOccurs="0"/>
+				<xs:element ref="nhis:route"/>
+				<xs:element ref="nhis:doseQuantity"/>
+				<xs:element ref="nhis:frequency"/>
+				<xs:element ref="nhis:period"/>
+				<xs:element ref="nhis:periodUnit"/>
+				<xs:element ref="nhis:boundsDuration"/>
+				<xs:element ref="nhis:boundsDurationUnit"/>
+				<xs:element ref="nhis:text" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Verification' block -->
+	<xs:element name="verificationCode" type="nhis:verificationCodeBase"/>
+	<xs:element name="ppn" type="nhis:ppnBase"/>
+	<xs:element name="gtin" type="nhis:gtinBase"/>
+	<xs:element name="sn" type="nhis:snBase"/>
+	<xs:element name="lot" type="nhis:lotBase"/>
+	<xs:element name="exp" type="nhis:expBase"/>
+	<xs:element name="verification">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:verificationCode" minOccurs="0"/>
+				<xs:element ref="nhis:ppn" minOccurs="0"/>
+				<xs:element ref="nhis:gtin" minOccurs="0"/>
+				<xs:element ref="nhis:sn" minOccurs="0"/>
+				<xs:element ref="nhis:lot" minOccurs="0"/>
+				<xs:element ref="nhis:exp" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Substitution' block -->
+	<xs:element name="wasSubstituted" type="nhis:wasSubstitutedBase"/>
+	<xs:element name="substitutionType" type="nhis:substitutionTypeBase"/>
+	<xs:element name="reason" type="nhis:reasonBase"/>
+	<xs:element name="substitution">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:wasSubstituted"/>
+				<xs:element ref="nhis:substitutionType"/>
+				<xs:element ref="nhis:reason"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Medication' block -->
+	<xs:element name="sequenceId" type="nhis:sequenceIdBase"/>
+	<xs:element name="medicationCode" type="nhis:medicationCodeBase"/>
+	<xs:element name="nhifCode" type="nhis:nhifCodeBase"/>
+	<xs:element name="quantity" type="nhis:quantityBase"/>
+	<xs:element name="whenPrepared" type="nhis:whenPreparedBase"/>
+	<xs:element name="whenHandedOver" type="nhis:whenHandedOverBase"/>
+	<xs:element name="paidByPatient" type="nhis:amount"/>
+	<xs:element name="paidByNhif" type="nhis:amount"/>
+	<xs:element name="medication">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:sequenceId"/>
+				<xs:element ref="nhis:medicationCode"/>
+				<xs:element ref="nhis:verification" minOccurs="0"/>
+				<xs:element ref="nhis:nhifCode" minOccurs="0"/>
+				<xs:element ref="nhis:quantity"/>
+				<xs:element ref="nhis:whenPrepared" minOccurs="0"/>
+				<xs:element ref="nhis:whenHandedOver"/>
+				<xs:element ref="nhis:paidByPatient" minOccurs="0"/>
+				<xs:element ref="nhis:paidByNhif" minOccurs="0"/>
+				<xs:element ref="nhis:substitution" minOccurs="0"/>
+				<xs:element ref="nhis:dosageInstruction" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Medication Group' block -->
+	<xs:element name="groupIdentifier" type="nhis:groupIdentifierBase"/>
+	<xs:element name="group">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:groupIdentifier" minOccurs="0"/>
+				<xs:element ref="nhis:medication" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Receiver' block -->
+	<xs:element name="identifierType" type="nhis:identifierTypeBase"/>
+	<xs:element name="identifier" type="nhis:identifierBase"/>
+	<xs:element name="name" type="nhis:humanNameBase"/>
+	<xs:element name="receiver">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:identifierType"/>
+				<xs:element ref="nhis:identifier"/>
+				<xs:element ref="nhis:name"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Dispense' block -->
+	<xs:element name="fulfilDate" type="nhis:fulfilDateBase"/>
+	<xs:element name="isInternationalFulfil" type="nhis:isInternationalFulfilBase"/>
+	<xs:element name="isPatientReceiver" type="nhis:isPatientReceiverBase"/>
+	<xs:element name="dispense">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:fulfilDate"/>
+				<xs:element ref="nhis:isInternationalFulfil" minOccurs="0"/>
+				<xs:element ref="nhis:group" maxOccurs="3"/>
+				<xs:element ref="nhis:isPatientReceiver" minOccurs="0"/>
+				<xs:element ref="nhis:receiver" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- Define all elements in 'Pharmacist / Pharmacy' block -->
+	<xs:element name="pphi" type="nhis:pphiBase"/>
+	<xs:element name="rphaNumber" type="nhis:rphaNumberBase"/>
+	<xs:element name="pharmacyNumber" type="nhis:pharmacyNumberBase"/>
+	<xs:element name="phone" type="nhis:phoneBase"/>
+	<xs:element name="email" type="nhis:emailBase"/>
+	<xs:element name="performer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="nhis:pphi"/>
+				<xs:element ref="nhis:rphaNumber"/>
+				<xs:element ref="nhis:pharmacyNumber"/>
+				<xs:element ref="nhis:phone" minOccurs="0"/>
+				<xs:element ref="nhis:email" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
