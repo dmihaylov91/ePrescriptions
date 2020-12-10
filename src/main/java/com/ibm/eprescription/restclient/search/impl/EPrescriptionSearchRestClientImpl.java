@@ -21,9 +21,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
+import com.ibm.eprescription.model.EPrescriptionErrorMessage;
 import com.ibm.eprescription.model.P003_Message;
 import com.ibm.eprescription.model.P004_Message;
-import com.ibm.eprescription.model.P099_Message;
 import com.ibm.eprescription.restclient.AbstractEPrescriptionRestClient;
 import com.ibm.eprescription.restclient.exception.EPrescriptionResponseException;
 import com.ibm.eprescription.restclient.search.EPrescriptionSearchRestClient;
@@ -45,7 +45,7 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 		} catch (EPrescriptionResponseException e) {
 			return new P004_Message(e.getErrorMessage());
 		} catch (Exception e) {
-			return new P004_Message(new P099_Message(e.getMessage()));
+			return new P004_Message(new EPrescriptionErrorMessage(e.getMessage()));
 		}
 	}
 
@@ -64,7 +64,7 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			return new P004_Message(e.getErrorMessage());
 
 		} catch (Exception e) {
-			return new P004_Message(new P099_Message(e.getMessage()));
+			return new P004_Message(new EPrescriptionErrorMessage(e.getMessage()));
 		}
 	}
 
@@ -82,7 +82,7 @@ public class EPrescriptionSearchRestClientImpl extends AbstractEPrescriptionRest
 			return new P004_Message(e.getErrorMessage());
 
 		} catch (Exception e) {
-			return new P004_Message(new P099_Message(e.getMessage()));
+			return new P004_Message(new EPrescriptionErrorMessage(e.getMessage()));
 		}
 	}
 

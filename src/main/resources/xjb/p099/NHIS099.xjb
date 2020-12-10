@@ -12,6 +12,14 @@
                 <jxb:anonymousTypeName prefix="P099_"/>
             </jxb:nameXmlTransform>
         </jxb:schemaBindings>  
+        
+ 
+        <jxb:bindings node="//*/xs:complexType[@name='contentsBase']">
+        	<jxb:property name="identifierTypeCustom"/>
+        </jxb:bindings>
+   
+        
+        
     </jxb:bindings>
 
 </jxb:bindings>

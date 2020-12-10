@@ -7,22 +7,22 @@ import com.ibm.eprescription.model.p006.P006_MessageBase;
 @XmlRootElement(name = "message", namespace = "https://www.his.bg")
 public class P006_Message extends P006_MessageBase {
 
-	private P099_Message errorMessage;
+	private EPrescriptionErrorMessage errorMessage;
 
 	public P006_Message() {
 		super();
 	}
 
-	public P006_Message(P099_Message errorMessage) {
+	public P006_Message(EPrescriptionErrorMessage errorMessage) {
 		super();
 		this.errorMessage = errorMessage;
 	}
 
-	public P099_Message getErrorMessage() {
+	public EPrescriptionErrorMessage getErrorMessage() {
 		return errorMessage;
 	}
 
-	public void setErrorMessage(P099_Message errorMessage) {
+	public void setErrorMessage(EPrescriptionErrorMessage errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 

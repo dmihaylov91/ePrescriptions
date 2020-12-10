@@ -20,9 +20,9 @@
 				<nhis:groupIdentifier value="A" dataType="[code]"/>
 				<nhis:medication>
 					<nhis:sequenceId value="1" dataType="[positiveInt]"/>
-					<nhis:medicationCode value="" dataType="[code]"/>
+					<nhis:medicationCode value="1010101" dataType="[code]"/>
+					<nhis:form value="" dataType="[code]"/>
 					<nhis:verification>
-						<nhis:verificationCode value="30912830123" dataType="[string]"/>
 						<nhis:ppn value="1233123" dataType="[string]"/>
 						<nhis:gtin value="41232133123123" dataType="[string]"/>
 						<nhis:sn value="412321" dataType="[string]"/>
@@ -30,7 +30,8 @@
 						<nhis:exp value="201026" dataType="[date]"/>
 					</nhis:verification>
 					<nhis:nhifCode value="" dataType="[code]"/>
-					<nhis:quantity value="2" dataType="[positiveInt]"/>
+					<nhis:quantityValue value="2" dataType="[decimal]"/>
+					<nhis:isQuantityByForm value="false" dataType="[boolean]"/>
 					<nhis:whenPrepared value="2020-10-21T18:11:23" dataType="[dateTime]"/>
 					<nhis:whenHandedOver value="2020-10-21T18:11:23" dataType="[dateTime]"/>
 					<nhis:paidByPatient value="20.31" dataType="[decimal]"/>
@@ -44,7 +45,7 @@
 						<nhis:sequence value="1" dataType="[positiveInt]"/>
 						<nhis:asNeeded value="false" dataType="[boolean]"/>
 						<nhis:route value="1" dataType="[code]"/>
-						<nhis:doseQuantity value="5" dataType="[positiveInt]"/>
+						<nhis:doseQuantityValue value="5" dataType="[decimal]"/>
 						<nhis:frequency value="2" dataType="[positiveInt]"/>
 						<nhis:period value="1" dataType="[decimal]"/>
 						<nhis:periodUnit value="d" dataType="[code]"/>

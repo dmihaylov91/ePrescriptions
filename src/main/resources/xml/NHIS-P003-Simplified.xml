@@ -21,6 +21,7 @@
 			<nhis:middle value="Myself" dataType="[string]"/>
 			<nhis:family value="More" dataType="[string]"/>
 		</nhis:name>
+		<nhis:lastDigitsNrn value="1273" dataType="[string]"/>
 	</nhis:contents>
 	<nhis:signature/>
 </nhis:message>

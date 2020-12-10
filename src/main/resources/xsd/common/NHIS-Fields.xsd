@@ -1,7 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0.1">
-	<xs:include schemaLocation="./NHIS-Commons.xsd"/>
-	<!-- Define field base types for reuse in multiple messages. WARNING: Keep the aphabetical order -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg"
+	elementFormDefault="qualified" version="1.0.4">
+	<xs:include schemaLocation="./NHIS-Commons.xsd" />
+	<!-- Define field base types for reuse in multiple messages. WARNING: Keep 
+		the alphabetical order -->
+	<xs:complexType name="accessTokenBase">
+		<xs:annotation>
+			<xs:documentation>Токен за достъп до НЗИС</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="xs:string"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
 	<xs:complexType name="addressDetailsBase">
 		<xs:annotation>
 			<xs:documentation>Пълен адрес</xs:documentation>
@@ -9,11 +19,11 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:maxLength value="2000"/>
+					<xs:maxLength value="2000" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="ageBase">
 		<xs:annotation>
@@ -22,52 +32,68 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:positiveInteger">
-					<xs:totalDigits value="3"/>
+					<xs:totalDigits value="3" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="allowedRepeatsNumberBase">
 		<xs:annotation>
-			<xs:documentation>Колко пъти дадена рецептурна бланка за многократно отпускане може да се изпълнява. За неограничен брой пъти се въвежда 0</xs:documentation>
+			<xs:documentation>Колко пъти дадена рецептурна бланка за многократно
+				отпускане може да се изпълнява. За неограничен брой пъти се въвежда
+				0</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:unsignedInt">
-					<xs:totalDigits value="1"/>
+					<xs:totalDigits value="1" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="asNeededBase">
 		<xs:annotation>
-			<xs:documentation>Прием на лекарството при необходимост</xs:documentation>
+			<xs:documentation>Прием на лекарството при необходимост
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="authoredOnBase">
+		<xs:annotation>
+			<xs:documentation>Дата на издаване на документ</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="birthDateBase">
 		<xs:annotation>
 			<xs:documentation>Дата на раждане</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="boundsDurationBase">
 		<xs:annotation>
-			<xs:documentation>Продължителност на изпълнението на инструкциите в посочената мерна единица (напр. 30 дни, 2 седмици)</xs:documentation>
+			<xs:documentation>Продължителност на изпълнението на инструкциите в
+				посочената мерна единица (напр. 30 дни, 2 седмици)
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="boundsDurationUnitBase">
 		<xs:annotation>
-			<xs:documentation>Мерна единица за продължителността на изпълнението на инструкциите</xs:documentation>
+			<xs:documentation>Мерна единица за продължителността на изпълнението
+				на инструкциите</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL020" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL020"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="cityBase">
 		<xs:annotation>
@@ -76,39 +102,48 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphaString">
-					<xs:maxLength value="255"/>
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="countryCodeBase">
 		<xs:annotation>
-			<xs:documentation>Kод на държава/Националност по ISO 3166-1 alpha-2</xs:documentation>
+			<xs:documentation>Kод на държава/Националност по ISO 3166-1 alpha-2
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL005" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL005"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="deputyRoleBase">
 		<xs:annotation>
-			<xs:documentation>Роля по заместване на медицински специалист</xs:documentation>
+			<xs:documentation>Роля по заместване на медицински специалист
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL023" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL023"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="dispensationTypeBase">
 		<xs:annotation>
-			<xs:documentation>Начин на употреба на Е-рецепта от тип Т1</xs:documentation>
+			<xs:documentation>Начин на употреба на Е-рецепта от тип Т1
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL008" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL008"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="doseQuantityBase">
 		<xs:annotation>
-			<xs:documentation>Количество на медикамента за еднократен прием (спрямо инструкциите за дозировка). Например: 2 таблетки, 1 капка, 4 впръсквания</xs:documentation>
+			<xs:documentation>Количество на медикамента за еднократен прием
+				(спрямо инструкциите за дозировка). Например: 2 таблетки, 1 капка, 4
+				впръсквания</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:decimal"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="emailBase">
 		<xs:annotation>
@@ -117,32 +152,51 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:pattern value="[^@]+@[^\.]+\..+"/>
-					<xs:maxLength value="255"/>
+					<xs:pattern value="[^@]+@[^\.]+\..+" />
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="executeDateBase">
 		<xs:annotation>
 			<xs:documentation>Дата на завършване на дейностите</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="expBase">
 		<xs:annotation>
-			<xs:documentation>Срок на Годност на Лекарствен Продукт</xs:documentation>
+			<xs:documentation>Срок на Годност на Лекарствен Продукт
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:length value="6"/>
+					<xs:length value="6" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="expiresInBase">
+		<xs:annotation>
+			<xs:documentation>Време, в което валидността на ресурс изтича (в
+				секунди)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="expiresOnBase">
+		<xs:annotation>
+			<xs:documentation>Дата и час, в които валидността на ресурс изтича
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="xs:dateTime"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="familyNameBase">
 		<xs:annotation>
@@ -151,32 +205,43 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphaString">
-					<xs:maxLength value="255"/>
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="medicationFormBase">
+		<xs:annotation>
+			<xs:documentation>Лекарствена форма</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="nhis:CL010"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="frequencyBase">
 		<xs:annotation>
-			<xs:documentation>Честота на изпълнение на инструкциите спрямо периода на изпълнение</xs:documentation>
+			<xs:documentation>Честота на изпълнение на инструкциите спрямо
+				периода на изпълнение</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="fulfilDateBase">
 		<xs:annotation>
 			<xs:documentation>Дата на изпълнение</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="genderBase">
 		<xs:annotation>
 			<xs:documentation>Пол</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL001" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL001"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="givenNameBase">
 		<xs:annotation>
@@ -185,257 +250,326 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphaString">
-					<xs:maxLength value="255"/>
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="groupIdentifierBase">
 		<xs:annotation>
-			<xs:documentation>Само при рецепти от тип 5а - отрязък от рецептурната бланка (А, B или C), към който спада този медикамент</xs:documentation>
+			<xs:documentation>Само при рецепти от тип 5а - отрязък от
+				рецептурната бланка (А, B или C), към който спада този медикамент
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL019" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL019"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="gtinBase">
 		<xs:annotation>
-			<xs:documentation>Национален Търговски Номер на Лекарствен Продукт</xs:documentation>
+			<xs:documentation>Национален Търговски Номер на Лекарствен Продукт
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:length value="14"/>
+					<xs:length value="14" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="identifierBase">
 		<xs:annotation>
-			<xs:documentation>В зависимост от identifierType, има различно значение, съдържание и структура</xs:documentation>
+			<xs:documentation>В зависимост от identifierType, има различно
+				значение, съдържание и структура</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:maxLength value="255"/>
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="identifierTypeBase">
 		<xs:annotation>
-			<xs:documentation>Тип на идентификатор - ЕГН/ЛНЧ/SSN/Паспорт/Друг</xs:documentation>
+			<xs:documentation>Тип на идентификатор - ЕГН/ЛНЧ/SSN/Паспорт/Друг
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL004" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL004"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isBreastFeedingBase">
 		<xs:annotation>
-			<xs:documentation>Индикация дали пациентката е кърмачка</xs:documentation>
+			<xs:documentation>Индикация дали пациентката е кърмачка
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isCorrectionBase">
 		<xs:annotation>
-			<xs:documentation>Указва дали заявката е коригираща заявка за предходно въведени резултати</xs:documentation>
+			<xs:documentation>Указва дали заявката е коригираща заявка за
+				предходно въведени резултати</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isDispensedBase">
 		<xs:annotation>
-			<xs:documentation>Уакзва дали този медикамент е вече издаден</xs:documentation>
+			<xs:documentation>Уакзва дали този медикамент е вече издаден
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isFulfilledBase">
 		<xs:annotation>
-			<xs:documentation>Уакзва дали рецептата е изпълнена (т.е. всички медикаменти са издадени към пациента)</xs:documentation>
+			<xs:documentation>Уакзва дали рецептата е изпълнена (т.е. всички
+				медикаменти са издадени към пациента)</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isInternationalFulfilBase">
 		<xs:annotation>
-			<xs:documentation>Дали рецептата е изпълнена извън България/Страната на издаване</xs:documentation>
+			<xs:documentation>Дали рецептата е изпълнена извън България/Страната
+				на издаване</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isPatientReceiverBase">
 		<xs:annotation>
-			<xs:documentation>Указва дали получателят на медикамента е самия пациент</xs:documentation>
+			<xs:documentation>Указва дали получателят на медикамента е самия
+				пациент</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isPregnantBase">
 		<xs:annotation>
-			<xs:documentation>Индикация дали пациентката е бременна</xs:documentation>
+			<xs:documentation>Индикация дали пациентката е бременна
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isProcessingBase">
 		<xs:annotation>
-			<xs:documentation>Указва дали лабораторията започва работа по тази дейност (напр. след събрана проба, направена снимка)</xs:documentation>
+			<xs:documentation>Указва дали лабораторията започва работа по тази
+				дейност (напр. след събрана проба, направена снимка)
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isProtocolBasedBase">
 		<xs:annotation>
-			<xs:documentation>Указва дали медикаментите ще се изписват по протокол или не</xs:documentation>
+			<xs:documentation>Указва дали медикаментите ще се изписват по
+				протокол или не</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="isQuantityByFormBase">
+		<xs:annotation>
+			<xs:documentation>Указва дали предписаното количество е по опаковки
+				или по лекарствена форма</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="isSubstitutionAllowedBase">
 		<xs:annotation>
-			<xs:documentation>Указва дали могат да бъдат изписани заместители за съответното лекарство</xs:documentation>
+			<xs:documentation>Указва дали могат да бъдат изписани заместители за
+				съответното лекарство</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
-	<xs:complexType name="authoredOnBase">
+	<xs:complexType name="issuedOnBase">
 		<xs:annotation>
-			<xs:documentation>Дата на издаване на документ</xs:documentation>
+			<xs:documentation>Дата и час, в които ресурс е издаден
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:dateTime"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="lrnBase">
 		<xs:annotation>
-			<xs:documentation>Уникален код генериран от системата на лекаря/стоматолога. Например: Година + УИН + пореден номер за съответната година</xs:documentation>
+			<xs:documentation>Уникален код генериран от системата на
+				лекаря/стоматолога. Например: Година + УИН + пореден номер за
+				съответната година</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:maxLength value="36"/>
+					<xs:maxLength value="36" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="lotBase">
 		<xs:annotation>
-			<xs:documentation>Номер на Партида на Лекарствен Продукт</xs:documentation>
+			<xs:documentation>Номер на Партида на Лекарствен Продукт
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="22"/>
+					<xs:minLength value="1" />
+					<xs:maxLength value="22" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="mdaBase">
 		<xs:annotation>
 			<xs:documentation>МКБ код</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL022" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL022"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="medicationCodeBase">
 		<xs:annotation>
-			<xs:documentation>Уникален идентификатор на медикамент. Извлича се от регистрите на НСЦРЛП</xs:documentation>
+			<xs:documentation>Уникален идентификатор на медикамент. Извлича се от
+				регистрите на НСЦРЛП</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL009" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL009"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="middleNameBase">
 		<xs:annotation>
-			<xs:documentation>Второ/Презиме/Бащино име (при повече от едно междинно име, въвеждат се в това поле разделени с интервал)</xs:documentation>
+			<xs:documentation>Второ/Презиме/Бащино име (при повече от едно
+				междинно име, въвеждат се в това поле разделени с интервал)
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphaString">
-					<xs:maxLength value="255"/>
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="mkbBase">
 		<xs:annotation>
 			<xs:documentation>МКБ код</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL011" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL011"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="nhifCodeBase">
 		<xs:annotation>
 			<xs:documentation>НЗОК код на Лекарствен продукт</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL026" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL026"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="nhifNumberBase">
 		<xs:annotation>
-			<xs:documentation>НЗОК номер на който е регистрирана съответната практика</xs:documentation>
+			<xs:documentation>НЗОК номер на който е регистрирана съответната
+				практика</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:string" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:string"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="nrnBase">
 		<xs:annotation>
-			<xs:documentation>Национален уникален номер на медицински документ, генериран от НЗИС</xs:documentation>
+			<xs:documentation>Национален уникален номер на медицински документ,
+				генериран от НЗИС</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:length value="12"/>
+					<xs:length value="12" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="observationCodeBase">
 		<xs:annotation>
 			<xs:documentation>Тип на наблюдението</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL024" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL024"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="offsetBase">
+		<xs:annotation>
+			<xs:documentation>Интервал в минути спрямо времето или събитието,
+				според което да се приеме лекарството (напр. "25 минути преди сън")
+			</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="xs:unsignedInt"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="outpatientSheetNumberBase">
 		<xs:annotation>
-			<xs:documentation>Номер на амбулаторен лист, за който се изписва рецептата</xs:documentation>
+			<xs:documentation>Номер на амбулаторен лист, за който се изписва
+				рецептата</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:maxLength value="12"/>
+					<xs:maxLength value="12" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="performedDateTimeBase">
 		<xs:annotation>
-			<xs:documentation>Дата, на която от пациента е взет биологичен материал или е извършено образно изследване</xs:documentation>
+			<xs:documentation>Дата, на която от пациента е взет биологичен
+				материал или е извършено образно изследване</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="periodBase">
 		<xs:annotation>
-			<xs:documentation>Период на изпълнение на инструкциите в посочената мерна единица</xs:documentation>
+			<xs:documentation>Период на изпълнение на инструкциите в посочената
+				мерна единица</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="periodUnitBase">
 		<xs:annotation>
-			<xs:documentation>Мерна единица за периода на изпълнението на инструкциите</xs:documentation>
+			<xs:documentation>Мерна единица за периода на изпълнението на
+				инструкциите</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL020" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL020"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="pharmacyNumberBase">
 		<xs:annotation>
@@ -444,37 +578,53 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:maxLength value="7"/>
+					<xs:maxLength value="7" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="phoneBase">
 		<xs:annotation>
-			<xs:documentation>Телефон за връзка - препоръчителен формат е MSISDN</xs:documentation>
+			<xs:documentation>Телефон за връзка - препоръчителен формат е MSISDN
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="15"/>
+					<xs:maxLength value="15" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="pinBase">
+		<xs:annotation>
+			<xs:documentation>Пин с 4 цифри и/или букви</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="nhis:alphanumericString">
+					<xs:minLength value="4" />
+					<xs:maxLength value="4" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="pmiBase">
 		<xs:annotation>
-			<xs:documentation>УИН/ЛПК на Лекар/Лекар по дентална медицина</xs:documentation>
+			<xs:documentation>УИН/ЛПК на Лекар/Лекар по дентална медицина
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="10"/>
+					<xs:maxLength value="10" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="postCodeBase">
 		<xs:annotation>
@@ -483,11 +633,11 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="20"/>
+					<xs:maxLength value="20" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="pphiBase">
 		<xs:annotation>
@@ -496,38 +646,40 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="10"/>
+					<xs:maxLength value="10" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="ppnBase">
 		<xs:annotation>
-			<xs:documentation>Продуктов Код на Лекарствен Продукт</xs:documentation>
+			<xs:documentation>Продуктов Код на Лекарствен Продукт
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:minLength value="4"/>
-					<xs:maxLength value="22"/>
+					<xs:minLength value="4" />
+					<xs:maxLength value="22" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="practiceNumberBase">
 		<xs:annotation>
-			<xs:documentation>Регистрационен номер на Лечебно заведение</xs:documentation>
+			<xs:documentation>Регистрационен номер на Лечебно заведение
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="10"/>
+					<xs:maxLength value="10" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="prBookNumberBase">
 		<xs:annotation>
@@ -536,60 +688,72 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="7"/>
+					<xs:maxLength value="7" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="prescriptionStatusBase">
 		<xs:annotation>
-			<xs:documentation>Статус на рецептата след изпълнението на заявката</xs:documentation>
+			<xs:documentation>Статус на рецептата след изпълнението на заявката
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL002" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL002"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="prescriptionTypeBase">
 		<xs:annotation>
-			<xs:documentation>Тип на рецептата - бяла, реимбурсирана бланка 5 или 5а</xs:documentation>
+			<xs:documentation>Тип на рецептата - бяла, реимбурсирана бланка 5 или
+				5а</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL007" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL007"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="priorityBase">
 		<xs:annotation>
-			<xs:documentation>Приоритет за издаване на лекарствения продукт - по подразбиране "рутинно"</xs:documentation>
+			<xs:documentation>Приоритет за издаване на лекарствения продукт - по
+				подразбиране "рутинно"</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL027" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL027"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="procedureCategoryBase">
 		<xs:annotation>
-			<xs:documentation>Категория на медико-диагностична дейност</xs:documentation>
+			<xs:documentation>Категория на медико-диагностична дейност
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL012" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL012"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="procedureMethodBase">
 		<xs:annotation>
-			<xs:documentation>Метод на извършване на медико-диагностична дейност</xs:documentation>
+			<xs:documentation>Метод на извършване на медико-диагностична дейност
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL025" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL025"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="procedureStatusBase">
 		<xs:annotation>
-			<xs:documentation>Статус на медико-диагностична дейност</xs:documentation>
+			<xs:documentation>Статус на медико-диагностична дейност
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL033" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL033"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="protocolDateBase">
 		<xs:annotation>
 			<xs:documentation>Дата на издаване на протокола</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="protocolNumberBase">
 		<xs:annotation>
@@ -598,41 +762,40 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:maxLength value="12"/>
+					<xs:maxLength value="12" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="qualificationBase">
-		<xs:attribute name="value" type="nhis:CL006" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL006"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="quantityBase">
 		<xs:annotation>
-			<xs:documentation>Количество на предписаните опаковки</xs:documentation>
+			<xs:documentation>Количество на предписаните опаковки
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" use="required">
-			<xs:simpleType>
-				<xs:restriction base="xs:positiveInteger">
-					<xs:totalDigits value="3"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:decimal"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="quantityDispensedBase">
 		<xs:annotation>
-			<xs:documentation>Количество на предоставените опаковки в аптеката до този момент (т.е. комбинация от извършени до сега издавания, ако има такива)</xs:documentation>
+			<xs:documentation>Количество на предоставените опаковки в аптеката до
+				този момент (т.е. комбинация от извършени до сега издавания, ако има
+				такива)</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:unsignedInt">
-					<xs:totalDigits value="3"/>
+					<xs:totalDigits value="3" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="reasonBase">
 		<xs:annotation>
@@ -641,218 +804,256 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:maxLength value="2000"/>
+					<xs:maxLength value="2000" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="referenceHighBase">
 		<xs:annotation>
-			<xs:documentation>Горна референтна стойност (ако е приложима)</xs:documentation>
+			<xs:documentation>Горна референтна стойност (ако е приложима)
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:decimal" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:decimal"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="referenceLowBase">
 		<xs:annotation>
-			<xs:documentation>Долна референтна стойност (ако е приложима)</xs:documentation>
+			<xs:documentation>Долна референтна стойност (ако е приложима)
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:decimal" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:decimal"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="referenceTextBase">
 		<xs:annotation>
-			<xs:documentation>Текстова референтна стойност (ако е приложима)</xs:documentation>
+			<xs:documentation>Текстова референтна стойност (ако е приложима)
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:maxLength value="255"/>
+					<xs:maxLength value="255" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="referralStatusBase">
 		<xs:annotation>
-			<xs:documentation>Статус на направлението след изпълнението на заявката</xs:documentation>
+			<xs:documentation>Статус на направлението след изпълнението на
+				заявката</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL003" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL003"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="referralSubtypeBase">
 		<xs:annotation>
 			<xs:documentation>Повод за издаване на направление</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL021" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL021"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="referralTypeBase">
 		<xs:annotation>
 			<xs:documentation>Тип на направление</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL014" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL014"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="rhifAreaNumberBase">
 		<xs:annotation>
 			<xs:documentation>РЗОК номер и здравен район</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL029" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL029"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="rhifNumberBase">
 		<xs:annotation>
 			<xs:documentation>РЗОК номер</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL015" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL015"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="routeBase">
 		<xs:annotation>
-			<xs:documentation>По какъв път би следвало медикаментът да навлезе в тялото (напр. "орално")</xs:documentation>
+			<xs:documentation>По какъв път би следвало медикаментът да навлезе в
+				тялото (напр. "орално")</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL013" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL013"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="rphaNumberBase">
 		<xs:annotation>
-			<xs:documentation>Номер на Районна Фармацевтична колегия</xs:documentation>
+			<xs:documentation>Номер на Районна Фармацевтична колегия
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL017" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL017"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="searchDateBase">
 		<xs:annotation>
 			<xs:documentation>Дата за търсене в диапазон</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:date" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:date" use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="sequenceBase">
 		<xs:annotation>
-			<xs:documentation>Поредност на изпълнението в случай, че има повече от един елемент от този тип</xs:documentation>
+			<xs:documentation>Поредност на изпълнението в случай, че има повече
+				от един елемент от този тип</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="sequenceIdBase">
 		<xs:annotation>
-			<xs:documentation>Пореден номер на лекарствения продукт в рецептата (например: 1, 2, 3, ...)</xs:documentation>
+			<xs:documentation>Пореден номер на лекарствения продукт в рецептата
+				(например: 1, 2, 3, ...)</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:positiveInteger" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:positiveInteger"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="snBase">
 		<xs:annotation>
-			<xs:documentation>Сериен Номер на Лекарствен Продукт</xs:documentation>
+			<xs:documentation>Сериен Номер на Лекарствен Продукт
+			</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="nhis:alphanumericString">
-					<xs:minLength value="1"/>
-					<xs:maxLength value="22"/>
+					<xs:minLength value="1" />
+					<xs:maxLength value="22" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="substitutionTypeBase">
 		<xs:annotation>
-			<xs:documentation>Тип на заместването (напр: "генерично")</xs:documentation>
+			<xs:documentation>Тип на заместването (напр: "генерично")
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL016" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL016"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="textBase">
 		<xs:annotation>
-			<xs:documentation>Текстови указания за приема на лекарството.</xs:documentation>
+			<xs:documentation>Текстови указания</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:minLength value="0"/>
-					<xs:maxLength value="2000"/>
+					<xs:minLength value="0" />
+					<xs:maxLength value="2000" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="tokenTypeBase">
+		<xs:annotation>
+			<xs:documentation>Тип на авторизационен токен</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="bearer" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueCodeBase">
 		<xs:annotation>
-			<xs:documentation>При valueScale стойност "NOM" - резултатът от наблюдението се записва чрез избор от номенклатура</xs:documentation>
+			<xs:documentation>При valueScale стойност "NOM" - резултатът от
+				наблюдението се записва чрез избор от номенклатура
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL030" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL030"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueDateTimeBase">
 		<xs:annotation>
-			<xs:documentation>Дата и час на излизане на резултата от наблюдението</xs:documentation>
+			<xs:documentation>Дата и час на излизане на резултата от наблюдението
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:dateTime" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:dateTime"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueNomenclatureBase">
 		<xs:annotation>
-			<xs:documentation>Тип на използваната номенклатура за резултат</xs:documentation>
+			<xs:documentation>Тип на използваната номенклатура за резултат
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL032" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL032"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueQuantityBase">
 		<xs:annotation>
-			<xs:documentation>При valueScale стойност "QN" - резултатът от наблюдението се записва чрез децимална стойност</xs:documentation>
+			<xs:documentation>При valueScale стойност "QN" - резултатът от
+				наблюдението се записва чрез децимална стойност</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:decimal" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:decimal"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueScaleBase">
 		<xs:annotation>
-			<xs:documentation>Скала на стойността на резултата от наблюдението</xs:documentation>
+			<xs:documentation>Скала на стойността на резултата от наблюдението
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL028" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL028"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueStringBase">
 		<xs:annotation>
-			<xs:documentation>При valueScale стойност "NAR" - резултатът от наблюдението се записва чрез свободен текст</xs:documentation>
+			<xs:documentation>При valueScale стойност "NAR" - резултатът от
+				наблюдението се записва чрез свободен текст</xs:documentation>
 		</xs:annotation>
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:string">
-					<xs:maxLength value="4000"/>
+					<xs:maxLength value="4000" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="valueUnitBase">
 		<xs:annotation>
-			<xs:documentation>Мерна единица на стойността на резултата от наблюдението (ако е приложима)</xs:documentation>
+			<xs:documentation>Мерна единица на стойността на резултата от
+				наблюдението (ако е приложима)</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="nhis:CL031" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
-	</xs:complexType>
-	<xs:complexType name="verificationCodeBase">
-		<xs:annotation>
-			<xs:documentation>Верификационен код на Лекарствен Продукт</xs:documentation>
-		</xs:annotation>
-		<xs:attribute name="value" use="required">
-			<xs:simpleType>
-				<xs:restriction base="nhis:numericString">
-					<xs:maxLength value="80"/>
-				</xs:restriction>
-			</xs:simpleType>
-		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="nhis:CL031"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="wasSubstitutedBase">
 		<xs:annotation>
-			<xs:documentation>Указва, дали медикамента е бил заместен с друг</xs:documentation>
+			<xs:documentation>Указва, дали медикамента е бил заместен с друг
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:boolean" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:boolean"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="weightBase">
 		<xs:annotation>
@@ -861,40 +1062,56 @@
 		<xs:attribute name="value" use="required">
 			<xs:simpleType>
 				<xs:restriction base="xs:positiveInteger">
-					<xs:totalDigits value="3"/>
+					<xs:totalDigits value="3" />
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:attribute>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="whenHandedOverBase">
 		<xs:annotation>
-			<xs:documentation>Дата и час на издаване на медикамента към пациента</xs:documentation>
+			<xs:documentation>Дата и час на издаване на медикамента към пациента
+			</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:dateTime" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:dateTime"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<xs:complexType name="whenPreparedBase">
 		<xs:annotation>
-			<xs:documentation>Дата и час на приготвяне на медикамента, ако се приготвя на място в аптеката</xs:documentation>
+			<xs:documentation>Дата и час на приготвяне на медикамента, ако се
+				приготвя на място в аптеката</xs:documentation>
 		</xs:annotation>
-		<xs:attribute name="value" type="xs:dateTime" use="required"/>
-		<xs:attribute name="dataType" type="xs:string"/>
+		<xs:attribute name="value" type="xs:dateTime"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
+	</xs:complexType>
+	<xs:complexType name="whenToTakeBase">
+		<xs:annotation>
+			<xs:documentation>Време или събитие, според което да се приеме
+				лекарството (напр. "с храна" или "преди сън")</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="value" type="nhis:CL034"
+			use="required" />
+		<xs:attribute name="dataType" type="xs:string" />
 	</xs:complexType>
 	<!-- Define common complex types -->
 	<xs:complexType name="addressBase">
 		<xs:sequence>
-			<xs:element name="country" type="nhis:countryCodeBase"/>
-			<xs:element name="city" type="nhis:cityBase"/>
-			<xs:element name="line" type="nhis:addressDetailsBase" minOccurs="0"/>
-			<xs:element name="postalCode" type="nhis:postCodeBase" minOccurs="0"/>
+			<xs:element name="country" type="nhis:countryCodeBase" />
+			<xs:element name="city" type="nhis:cityBase" />
+			<xs:element name="line" type="nhis:addressDetailsBase"
+				minOccurs="0" />
+			<xs:element name="postalCode" type="nhis:postCodeBase"
+				minOccurs="0" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="humanNameBase">
 		<xs:sequence>
-			<xs:element name="given" type="nhis:givenNameBase"/>
-			<xs:element name="middle" type="nhis:middleNameBase" minOccurs="0"/>
-			<xs:element name="family" type="nhis:familyNameBase"/>
+			<xs:element name="given" type="nhis:givenNameBase" />
+			<xs:element name="middle" type="nhis:middleNameBase"
+				minOccurs="0" />
+			<xs:element name="family" type="nhis:familyNameBase" />
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:nhis="https://www.his.bg" targetNamespace="https://www.his.bg" elementFormDefault="qualified" version="1.0.2">
 	<xs:include schemaLocation="../common/NHIS-Fields.xsd"/>
 	<!-- Redefine the message contents for this type of message. -->
 	<xs:redefine schemaLocation="../common/NHIS-Commons.xsd">
@@ -37,31 +37,34 @@
 	<xs:element name="sequence" type="nhis:sequenceBase"/>
 	<xs:element name="asNeeded" type="nhis:asNeededBase"/>
 	<xs:element name="route" type="nhis:routeBase"/>
-	<xs:element name="doseQuantity" type="nhis:doseQuantityBase"/>
+	<xs:element name="doseQuantityValue" type="nhis:doseQuantityBase"/>
 	<xs:element name="frequency" type="nhis:frequencyBase"/>
 	<xs:element name="period" type="nhis:periodBase"/>
 	<xs:element name="periodUnit" type="nhis:periodUnitBase"/>
 	<xs:element name="boundsDuration" type="nhis:boundsDurationBase"/>
 	<xs:element name="boundsDurationUnit" type="nhis:boundsDurationUnitBase"/>
+	<xs:element name="when" type="nhis:whenToTakeBase"/>
+	<xs:element name="offset" type="nhis:offsetBase"/>
 	<xs:element name="text" type="nhis:textBase"/>
 	<xs:element name="dosageInstruction">
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element ref="nhis:sequence" minOccurs="0"/>
 				<xs:element ref="nhis:asNeeded" minOccurs="0"/>
-				<xs:element ref="nhis:route"/>
-				<xs:element ref="nhis:doseQuantity"/>
+				<xs:element ref="nhis:route" minOccurs="0"/>
+				<xs:element ref="nhis:doseQuantityValue"/>
 				<xs:element ref="nhis:frequency"/>
 				<xs:element ref="nhis:period"/>
 				<xs:element ref="nhis:periodUnit"/>
-				<xs:element ref="nhis:boundsDuration"/>
-				<xs:element ref="nhis:boundsDurationUnit"/>
+				<xs:element ref="nhis:boundsDuration" minOccurs="0"/>
+				<xs:element ref="nhis:boundsDurationUnit" minOccurs="0"/>
+				<xs:element ref="nhis:when" minOccurs="0"/>
+				<xs:element ref="nhis:offset" minOccurs="0"/>
 				<xs:element ref="nhis:text" minOccurs="0"/>
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
 	<!-- Define all elements in 'Verification' block -->
-	<xs:element name="verificationCode" type="nhis:verificationCodeBase"/>
 	<xs:element name="ppn" type="nhis:ppnBase"/>
 	<xs:element name="gtin" type="nhis:gtinBase"/>
 	<xs:element name="sn" type="nhis:snBase"/>
@@ -70,7 +73,6 @@
 	<xs:element name="verification">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element ref="nhis:verificationCode" minOccurs="0"/>
 				<xs:element ref="nhis:ppn" minOccurs="0"/>
 				<xs:element ref="nhis:gtin" minOccurs="0"/>
 				<xs:element ref="nhis:sn" minOccurs="0"/>
@@ -96,7 +98,8 @@
 	<xs:element name="sequenceId" type="nhis:sequenceIdBase"/>
 	<xs:element name="medicationCode" type="nhis:medicationCodeBase"/>
 	<xs:element name="nhifCode" type="nhis:nhifCodeBase"/>
-	<xs:element name="quantity" type="nhis:quantityBase"/>
+	<xs:element name="quantityValue" type="nhis:quantityBase"/>
+	<xs:element name="isQuantityByForm" type="nhis:isQuantityByFormBase"/>
 	<xs:element name="whenPrepared" type="nhis:whenPreparedBase"/>
 	<xs:element name="whenHandedOver" type="nhis:whenHandedOverBase"/>
 	<xs:element name="paidByPatient" type="nhis:amount"/>
@@ -108,7 +111,8 @@
 				<xs:element ref="nhis:medicationCode"/>
 				<xs:element ref="nhis:verification" minOccurs="0"/>
 				<xs:element ref="nhis:nhifCode" minOccurs="0"/>
-				<xs:element ref="nhis:quantity"/>
+				<xs:element ref="nhis:quantityValue"/>
+				<xs:element ref="nhis:isQuantityByForm"/>
 				<xs:element ref="nhis:whenPrepared" minOccurs="0"/>
 				<xs:element ref="nhis:whenHandedOver"/>
 				<xs:element ref="nhis:paidByPatient" minOccurs="0"/>
@@ -150,7 +154,7 @@
 			<xs:sequence>
 				<xs:element ref="nhis:fulfilDate"/>
 				<xs:element ref="nhis:isInternationalFulfil" minOccurs="0"/>
-				<xs:element ref="nhis:group" maxOccurs="3"/>
+				<xs:element ref="nhis:group"/>
 				<xs:element ref="nhis:isPatientReceiver" minOccurs="0"/>
 				<xs:element ref="nhis:receiver" minOccurs="0"/>
 			</xs:sequence>

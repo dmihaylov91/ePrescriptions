@@ -13,11 +13,11 @@
             </jxb:nameXmlTransform>         
         </jxb:schemaBindings>
         
-        <!-- 
-        <jxb:bindings node="//*/xs:element[@ref='nhis:identifierType']">
-        	<jxb:property name="identifierTypeCustom"/>
+
+        <jxb:bindings node="//*/xs:element[@name='header']">
+        	<jxb:property name="kur"/>
         </jxb:bindings>
-        -->
+
         
                 
     </jxb:bindings>

@@ -14,6 +14,7 @@
 						<xs:element ref="nhis:identifier" minOccurs="0"/>
 						<xs:element ref="nhis:birthDate" minOccurs="0"/>
 						<xs:element ref="nhis:name" minOccurs="0"/>
+						<xs:element ref="nhis:lastDigitsNrn" minOccurs="0"/>
 					</xs:sequence>
 				</xs:extension>
 			</xs:complexContent>
@@ -36,4 +37,5 @@
 	<xs:element name="identifier" type="nhis:identifierBase"/>
 	<xs:element name="birthDate" type="nhis:birthDateBase"/>
 	<xs:element name="name" type="nhis:humanNameBase"/>
+	<xs:element name="lastDigitsNrn" type="nhis:pinBase"/>
 </xs:schema>

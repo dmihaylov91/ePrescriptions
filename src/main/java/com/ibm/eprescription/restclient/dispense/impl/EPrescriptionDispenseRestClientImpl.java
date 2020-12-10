@@ -3,9 +3,9 @@ package com.ibm.eprescription.restclient.dispense.impl;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
+import com.ibm.eprescription.model.EPrescriptionErrorMessage;
 import com.ibm.eprescription.model.P005_Message;
 import com.ibm.eprescription.model.P006_Message;
-import com.ibm.eprescription.model.P099_Message;
 import com.ibm.eprescription.restclient.AbstractEPrescriptionRestClient;
 import com.ibm.eprescription.restclient.dispense.EPrescriptionDispenseRestClient;
 import com.ibm.eprescription.restclient.exception.EPrescriptionResponseException;
@@ -23,7 +23,7 @@ public class EPrescriptionDispenseRestClientImpl extends AbstractEPrescriptionRe
 		} catch (EPrescriptionResponseException e) {
 			return new P006_Message(e.getErrorMessage());
 		} catch (Exception e) {
-			return new P006_Message(new P099_Message(e.getMessage()));
+			return new P006_Message(new EPrescriptionErrorMessage(e.getMessage()));
 		}
 	}
 

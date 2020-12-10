@@ -662,3 +662,13 @@ build/
 /src/main/java/com/ibm/eprescription/model/p006/Sender.java
 /src/main/java/com/ibm/eprescription/model/p006/SenderId.java
 /src/main/java/com/ibm/eprescription/model/p006/package-info.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_AccessTokenBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_ExpiresInBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_ExpiresOnBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_IsQuantityByFormBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_IssuedOnBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_MedicationFormBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_OffsetBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_PinBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_TokenTypeBase.java
+/src/main/java/com/ibm/eprescription/model/p099/P099_WhenToTakeBase.java

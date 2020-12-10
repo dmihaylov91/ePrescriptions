@@ -11,9 +11,11 @@ import javax.xml.bind.Unmarshaller;
 import org.springframework.http.HttpStatus.Series;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.client.ResponseErrorHandler;
 
+import com.ibm.eprescription.model.EPrescriptionErrorMessage;
 import com.ibm.eprescription.model.P099_Message;
 
 @Component
@@ -27,27 +29,27 @@ public class DummyEPrescriptionResponseErrorHandler implements ResponseErrorHand
 	@Override
 	public void handleError(ClientHttpResponse response) throws IOException {
 
-		P099_Message errorMessage = new P099_Message();
+		EPrescriptionErrorMessage errorMessage = new EPrescriptionErrorMessage();
+		errorMessage.setHttpStatus(response.getStatusCode());
+		errorMessage.setErrorMessage(response.getRawStatusCode() + " " + response.getStatusText());
 		try {
 			File file = ResourceUtils.getFile("classpath:xml/NHIS-P099-Simplified.xml");
 
 			JAXBContext jaxbContext = JAXBContext.newInstance(P099_Message.class);
 			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			errorMessage = (P099_Message) jaxbUnmarshaller.unmarshal(file);
+			P099_Message message = (P099_Message) jaxbUnmarshaller.unmarshal(file);
 
-			errorMessage.setHttpStatus(response.getStatusCode());
-			errorMessage.setErrorMessage(response.getRawStatusCode() + " " + response.getStatusText());
+			if (message.getContents() != null && !CollectionUtils.isEmpty(message.getContents().getError())) {
+				errorMessage.setError(message.getContents().getError());
+			}
+
 			throw new EPrescriptionResponseException(errorMessage);
 
 		} catch (FileNotFoundException e) {
-			errorMessage.setHttpStatus(response.getStatusCode());
 			errorMessage.setErrorMessage(e.getMessage());
-
 			throw new EPrescriptionResponseException(errorMessage);
 		} catch (JAXBException e) {
-			errorMessage.setHttpStatus(response.getStatusCode());
 			errorMessage.setErrorMessage(e.getMessage());
-
 			throw new EPrescriptionResponseException(errorMessage);
 		}
 	}
